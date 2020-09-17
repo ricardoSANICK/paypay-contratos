@@ -1,0 +1,393 @@
+openapi: 3.0.0
+info:
+  title: Paypay Middleware API
+  description: Connection with the Frontend and route to the core API Paypay 
+  version: 0.0.1
+servers:
+  - url: https://{environment}.com:9088/api/v1/paypay
+    variables:
+      environment:
+        default: paypay.dev    # Production server
+        enum:
+          - paypay             # Production server
+          - paypay.dev         # Development server
+          - paypay.qa          # Quality assurance server
+paths:
+  /combo/{option}:
+    get:
+      tags:
+        - Combo
+      summary: Gets a combo by an option
+      description: >
+       Get a list of combo by an option
+       depending of the parameter
+      operationId: getCombo
+      parameters:
+        - name: option
+          in: path
+          description: Combo
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperComboListAllType'
+  /employee/{id}:
+    get:
+      tags:
+        - Employee
+      summary: Gets a employee by ID.
+      description: >
+        Get all the employees by an ID
+        as an object
+      operationId: getEmployeeById
+      parameters:
+        - name: id
+          in: path
+          description: Employee ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperEmployeeAllType'
+    delete:
+      tags: 
+        - Employee
+      summary: Delete a record.
+      description: >
+        Delete (Logically) one or multiple records of a employee
+      operationId: disable
+      parameters:
+        - name: id
+          in: path
+          description: Employee ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+  /review/{id}:
+    get:
+      tags:
+        - Performance
+      summary: Gets a review by ID.
+      description: >
+        Get all the reviews by an ID
+        as an object
+      operationId: getReviewById
+      parameters:
+        - name: id
+          in: path
+          description: Review ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperReviewAllType'
+    delete:
+      tags: 
+        - Performance
+      summary: Delete a record.
+      description: >
+        Delete (Logically) one or multiple records of a review
+      operationId: disable
+      parameters:
+        - name: id
+          in: path
+          description: Review ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+  /feedback/{id}:
+    get:
+      tags:
+        - Performance
+      summary: Gets a feedback by ID.
+      description: >
+        Get all the feedbacks by an ID
+        as an object
+      operationId: getFeedbackById
+      parameters:
+        - name: id
+          in: path
+          description: Feedback ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperFeedbackAllType'
+    delete:
+      tags: 
+        - Performance
+      summary: Delete a record.
+      description: >
+        Delete (Logically) one or multiple records of a feedback
+      operationId: disable
+      parameters:
+        - name: id
+          in: path
+          description: Feedback ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+  /employee:
+    post:
+      tags: 
+        - Employee
+      summary: Insert a new Object.
+      description: >
+        Insert one single record of a employee
+      operationId: save
+      requestBody:
+        description: Insert a employee object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperEmployeeAllType'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperEmployeeAllType"
+    put:
+      tags: 
+        - Employee
+      summary: Update a record.
+      description: >
+        Update one single record of a employee
+      operationId: update
+      requestBody:
+        description: Update a employee object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperEmployeeAllType'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperEmployeeAllType"
+    get:
+      tags: 
+        - Employee
+      summary: Get all records.
+      description: >
+        Get all the records of the employees
+      operationId: getAll
+      parameters:
+        - name: id
+          in: query
+          description: Employee by ID
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Employees by name
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperEmployeeListAllType"
+  /review:
+    post:
+      tags: 
+        - Performance
+      summary: Insert a new Object.
+      description: >
+        Insert one single record of a review
+      operationId: save
+      requestBody:
+        description: Insert a review object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperReviewAllType'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperReviewAllType"
+    put:
+      tags: 
+        - Performance
+      summary: Update a record.
+      description: >
+        Update one single record of a review
+      operationId: update
+      requestBody:
+        description: Update a review object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperReviewAllType'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperReviewAllType"
+    get:
+      tags: 
+        - Performance
+      summary: Get all records.
+      description: >
+        Get all the records of the reviews
+      operationId: getAll
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperReviewListAllType"
+  /feedback:
+    post:
+      tags: 
+        - Performance
+      summary: Insert a new Object.
+      description: >
+        Insert one single record of a feedback
+      operationId: save
+      requestBody:
+        description: Insert a feedback object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperFeedbackAllType'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperFeedbackAllType"
+    put:
+      tags: 
+        - Performance
+      summary: Update a record.
+      description: >
+        Update one single record of a feedback
+      operationId: update
+      requestBody:
+        description: Update a feedback object.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperFeedbackAllType'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperFeedbackAllType"
+    get:
+      tags: 
+        - Performance
+      summary: Get all records.
+      description: >
+        Get all the records of the feedbacks
+      operationId: getAll
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperFeedbackListAllType"
+components:
+  schemas:
+    OperComboListAllType:
+      type: object
+      description: Multiple news as a list.
+      properties:
+        combo:
+          $ref: '../Esquemas/generales.yaml#/components/schemas/ComboListType'
+    OperEmployeeAllType:
+      type: object
+      description: Request and response.
+      properties:
+        employee:
+          $ref: '../Esquemas/paypay.yaml#/components/schemas/EmployeeType'
+    OperEmployeeListAllType:
+      type: object
+      description: Multiple employees as a list.
+      properties:
+        employees: 
+          $ref: '../Esquemas/paypay.yaml#/components/schemas/EmployeeListType'
+    OperReviewAllType:
+      type: object
+      description: Request and response.
+      properties:
+        review:
+          $ref: '../Esquemas/paypay.yaml#/components/schemas/ReviewType'
+    OperReviewListAllType:
+      type: object
+      description: Multiple reviews as a list.
+      properties:
+        reviews: 
+          $ref: '../Esquemas/paypay.yaml#/components/schemas/ReviewListType'
+    OperFeedbackAllType:
+      type: object
+      description: Request and response.
+      properties:
+        feedback:
+          $ref: '../Esquemas/paypay.yaml#/components/schemas/FeedbackType'
+    OperFeedbackListAllType:
+      type: object
+      description: Multiple feedbacks as a list.
+      properties:
+        feedbacks: 
+          $ref: '../Esquemas/paypay.yaml#/components/schemas/FeedbackListType'

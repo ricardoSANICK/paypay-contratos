@@ -1,0 +1,82 @@
+---
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Generales
+
+paths: {}
+
+components:
+  schemas:
+    AuditType:
+      type: object
+      properties:
+        recordDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+        recordUsername:
+          type: string
+        updateUsername:
+          type: string
+        status:
+          type: boolean
+    ComboType:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    ImageResourceType:
+      type: object
+      properties:
+        name:
+          type: string
+        token:
+          type: string
+        file:
+          type: string
+          format: binary
+    ImageType:
+      type: object
+      properties:
+        id:
+          type: string
+        base64:
+          type: string
+    ImageListType:
+      type: object
+      description: Collection of ImageType
+      properties:
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageType'
+    ComboListType:
+      type: object
+      description: Collection of NewsType
+      properties:
+        combo:
+          type: array
+          items:
+            $ref: '#/components/schemas/ComboType'
+    GenericoRespuestaType:
+      type: object
+      description: Colección de expedientes adicionales de un asunto.
+      properties:
+        respuesta:
+          type: object
+          additionalProperties: {}
+    ResultadoOperacionType: 
+      type: object
+      properties: 
+        codigoMensaje: 
+          type: string
+          description: Indica el estatus de realizacion de la operacion. Contiene el valor del error para usuario final de una operacion a ejecutar
+        mensajeTecnico: 
+          type: string
+          description: Contiene el valor del error tecnico de una operacion a ejecutar

@@ -1,0 +1,5 @@
+{ 
+	"modelPackage": "com.paypay.baymax.modelo",
+	"apiPackage": "com.paypay.baymax.api",
+	"artifactId": "paypay-middleware-api"
+}

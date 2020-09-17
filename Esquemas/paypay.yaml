@@ -1,0 +1,72 @@
+---
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Paypay main
+
+paths: {}
+
+components:
+  schemas:
+    EmployeeType:
+      allOf:
+        - $ref: '../Esquemas/generales.yaml#/components/schemas/AuditType'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            name:
+              type: string
+    ReviewType:
+      allOf:
+        - $ref: '../Esquemas/generales.yaml#/components/schemas/AuditType'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            description:
+              type: string
+            assigners:
+              type: string
+    FeedbackType:
+      allOf:
+        - $ref: '../Esquemas/generales.yaml#/components/schemas/AuditType'
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            description:
+              type: string
+            assigner:
+              $ref: '#/components/schemas/EmployeeType'
+            assigned:
+              $ref: '#/components/schemas/EmployeeType'
+            review:
+              $ref: '#/components/schemas/ReviewType'
+    EmployeeListType:
+      type: object
+      description: Collection of EmployeeType
+      properties:
+        employees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeType'
+    ReviewListType:
+      type: object
+      description: Collection of ReviewType
+      properties:
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewType'
+    FeedbackListType:
+      type: object
+      description: Collection of FeedbackType
+      properties:
+        feedbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeedbackType'
